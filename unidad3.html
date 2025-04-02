@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SILABO - UNIDAD 3</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url(IMG/fondo.jpg);
+            text-align: center;
+        }
+        .titulo-cartas {
+            position: absolute;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+            background-color: #ffffff;
+            box-shadow: 0px 20px 40px rgb(0, 0, 0);
+            border-radius: 30px;
+            width: 720px;
+            margin-bottom: 300px; /* Espacio entre el título y las cartas */
+        }
+        .header {
+            width: 100%;
+            color: rgb(0, 124, 188);
+            background-color: rgb(255, 255, 255);
+            text-shadow: 0px 2px 1px rgb(61, 61, 61);;
+            text-align: center;
+            padding: 15px;
+            font-size: 35px;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 20;
+        }
+        .menu {
+            position: fixed;
+            left: 0;
+            top: 70px;
+            width: 200px;
+            background-color: rgb(0, 124, 188);
+            color: white;
+            padding: 10px;
+            height: 100%;
+            transform: translateX(-100%);
+            transition: transform 0.3s;
+            z-index: 20;
+        }
+        .menu.active {
+            transform: translateX(0);
+        }
+        .menu button {
+            background: rgb(0, 0, 0);
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100px;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+        .menu button:hover {
+            background: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            transition: 1s;
+        }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        .menu ul li {
+            padding: 10px;
+            background: #000000;
+            margin: 5px 0;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .menu ul li:hover {
+            padding: 10px;
+            background: #ffffff;
+            margin: 5px 0;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 10px;
+            color: black;
+        }
+        .menu-toggle {
+            position: fixed;
+            left: 10px;
+            top: 15px;
+            background: rgb(0, 124, 188);
+            color: rgb(255, 255, 255);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 30;
+        }
+        .container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+            padding: 20px;
+            transition: opacity 0.3s;
+            color: rgb(0, 0, 0);
+        }
+        .card {
+            width: 250px;
+            padding: 20px;
+            background: linear-gradient(135deg, #00d5ff, #00ff59);
+            border-radius: 8px;
+            box-shadow: 0px 10px 20px rgb(0, 0, 0);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+            z-index: 5;
+            margin-bottom: 20px;
+            border: 4px solid white; /* Borde blanco */
+        }
+        .cartas{
+            margin-top: 18%;
+            display: flex;
+            flex-direction: row;
+        }
+        .card img {
+            width: 160px;
+            height: 90px;
+            border-radius: 5px;
+            margin-top: 10px;
+            border: 1px solid white; /* Borde blanco */
+        }
+        .card.expanded {
+            width: 400px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.1);
+            z-index: 50;
+        }
+        .extra-info {
+            display: none;
+            margin-top: 15px;
+            text-align: left;
+        }
+        ul{
+            list-style: none;
+        }
+        .card.expanded .extra-info {
+            display: block;
+        }
+        .card button {
+            margin-top: 10px;
+            padding: 8px 12px;
+            border: none;
+            background-color: rgb(0, 0, 0);
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .dimmed .card:not(.expanded) {
+            opacity: 0.3;
+        }
+        a{
+            text-decoration: none;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">GERENCIA DE SISTEMAS DE INFORMACIÓN</div>
+        <button class="menu-toggle" onclick="toggleMenu()">☰ Menú</button>
+        <div class="menu" id="menu">
+        <ul>
+            <a href="index.html"><li>UNIDAD I</li></a>
+            <a href="unidad2.html"><li>UNIDAD II</li></a>
+            <a href="unidad3.html"><li>UNIDAD III</li></a>
+            <a href="unidad4.html"><li>UNIDAD IV</li></a>
+        </ul>
+        <button onclick="toggleMenu()">Cerrar Menú</button>
+    </div>
+    <div class="titulo-cartas">
+        <h2>UNIDAD III: INFRAESTRUCTURA DE TECNOLOGIAS DE INFORMACIÓN</h2>
+    </div>
+    <div class="cartas">
+        <div class="container"> <!--ACA EMPIEZA UNA TARJETA-->
+            <div class="card" onclick="expandCard(this)">
+                <h2>SEMANA</h2>
+                <p>09</p>
+                <img src="IMG/Gobierno de TI.png" alt="Imagen de referencia" height="150px" width="70px">
+                <div class="extra-info">
+                    <p><strong>Desempeños:</strong></p>
+                    <ul>
+                        <li>-Gobierno de TI.</li>
+                        <li>-Alineamiento estratégico de TI con los objetivos de la empresa, creación de valor</li>
+                        <li>-Gestión de procesos</li>
+                    </ul>
+                    <p><strong>Estrategias didácticas:</strong></p>
+                    <ul>
+                        <li>-Método de estudio de casos</li>
+                        <li>-Discusiones en clase</li>
+                        <li>-Lluvia de ideas</li>
+                        <li>-Aprendizaje colaborativo</li>
+                    </ul>
+                    <p><strong>Evidencias productos:</strong></p>
+                    <ul>
+                        <li>-Elabora un cuadro con misión, visión y objetivos de la empresa y de los servicios de TI</li>
+                        <li>-Interactúa con sus compañeros para realizar un caso de gestión de eventos, incidencias y problemas.</li>
+                    </ul>
+                    <p><strong>Avance porcentual:</strong> 56.25%</p>
+                    <button onclick="collapseCard(event, this)">Cerrar</button>
+                </div>
+            </div>
+        </div><!--ACA FINALIZA UNA TARJETA-->
+        <div class="container"> <!--ACA EMPIEZA UNA TARJETA-->
+            <div class="card" onclick="expandCard(this)">
+                <h2>SEMANA</h2>
+                <p>10</p>
+                <img src="IMG/Gestión de servicios.jpg" alt="Imagen de referencia" height="150px" width="70px">
+                <div class="extra-info">
+                    <p><strong>Desempeños:</strong></p>
+                    <ul>
+                        <li>-Gestión de servicios</li>
+                        <li>-Estrategia del servicio</li>
+                    </ul>
+                    <p><strong>Estrategias didácticas:</strong></p>
+                    <ul>
+                        <li>-Método de estudio de casos</li>
+                        <li>-Discusiones en clase</li>
+                        <li>-Lluvia de ideas</li>
+                        <li>-Aprendizaje colaborativo</li>
+                    </ul>
+                    <p><strong>Evidencias productos:</strong></p>
+                    <ul>
+                        <li>-Elabora un cuadro con misión, visión y objetivos de la empresa y de los servicios de TI</li>
+                        <li>-Interactúa con sus compañeros para realizar un caso de gestión de eventos, incidencias y problemas.</li>
+                    </ul>
+                    <p><strong>Avance porcentual:</strong> 62.50%</p>
+                    <button onclick="collapseCard(event, this)">Cerrar</button>
+                </div>
+            </div>
+        </div><!--ACA FINALIZA UNA TARJETA-->
+        <div class="container"> <!--ACA EMPIEZA UNA TARJETA-->
+            <div class="card" onclick="expandCard(this)">
+                <h2>SEMANA</h2>
+                <p>11</p>
+                <img src="IMG/Diseño del servicio.jpg" alt="Imagen de referencia" height="150px" width="70px">
+                <div class="extra-info">
+                    <p><strong>Desempeños:</strong></p>
+                    <ul>
+                        <li>-Diseño del servicio</li>
+                        <li>-Transición del servicio</li>
+                    </ul>
+                    <p><strong>Estrategias didácticas:</strong></p>
+                    <ul>
+                        <li>-Método de estudio de casos</li>
+                        <li>-Discusiones en clase</li>
+                        <li>-Lluvia de ideas</li>
+                        <li>-Aprendizaje colaborativo</li>
+                    </ul>
+                    <p><strong>Evidencias productos:</strong></p>
+                    <ul>
+                        <li>-Elabora un cuadro con misión, visión y objetivos de la empresa y de los servicios de TI</li>
+                        <li>-Interactúa con sus compañeros para realizar un caso de gestión de eventos, incidencias y problemas.</li>
+                    </ul>
+                    <p><strong>Avance porcentual:</strong> 68.75%</p>
+                    <button onclick="collapseCard(event, this)">Cerrar</button>
+                </div>
+            </div>
+        </div><!--ACA FINALIZA UNA TARJETA-->
+        <div class="container"> <!--ACA EMPIEZA UNA TARJETA-->
+            <div class="card" onclick="expandCard(this)">
+                <h2>SEMANA</h2>
+                <p>12</p>
+                <img src="IMG/Infraestructura de TI.webp" alt="Imagen de referencia" height="150px" width="70px">
+                <div class="extra-info">
+                    <p><strong>Desempeños:</strong></p>
+                    <ul>
+                        <li>-Gestión del cambio</li>
+                        <li>-Gestión del conocimiento</li>
+                        <li>-Gestión de Eventos, incidencias y problemas</li>
+                        <li>-Centro de servicio</li>
+                    </ul>
+                    <p><strong>Estrategias didácticas:</strong></p>
+                    <ul>
+                        <li>-Método de estudio de casos</li>
+                        <li>-Discusiones en clase</li>
+                        <li>-Lluvia de ideas</li>
+                        <li>-Aprendizaje colaborativo</li>
+                    </ul>
+                    <p><strong>Evidencias productos:</strong></p>
+                    <ul>
+                        <li>-Elabora un cuadro con misión, visión y objetivos de la empresa y de los servicios de TI</li>
+                        <li>-Interactúa con sus compañeros para realizar un caso de gestión de eventos, incidencias y problemas.</li>
+                    </ul>
+                    <p><strong>Avance porcentual:</strong> 75%</p>
+                    <button onclick="collapseCard(event, this)">Cerrar</button>
+                </div>
+            </div>
+        </div><!--ACA FINALIZA UNA TARJETA-->
+    </div>
+    <script>
+        function toggleMenu() {
+            document.getElementById('menu').classList.toggle('active');
+        }
+        function expandCard(card) {
+            document.querySelector('body').classList.add('dimmed');
+            card.classList.add('expanded');
+        }
+        function collapseCard(event, button) {
+            event.stopPropagation();
+            button.closest('.card').classList.remove('expanded');
+            document.querySelector('body').classList.remove('dimmed');
+        }
+    </script>
+</body>
+</html>
